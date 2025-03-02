@@ -1,0 +1,153 @@
+/*************************************************************************** IMPORT ***************************************************************************/
+
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+
+/**************************************************************************** ALL ****************************************************************************/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/**************************************************************************** BODY ****************************************************************************/
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #e4e4e4;
+}
+
+/**************************************************************************** FORM ****************************************************************************/
+
+#form {
+    margin: 15vh auto;
+    padding: 3vw;
+    width: 80vw;
+    min-height: 70vh;
+    background-color: #FDFDFD;
+    box-shadow: 3px 3px 6px #333;
+}
+/**************************************************************************** LOGO ****************************************************************************/
+
+#LogoMSPBS {
+    max-height: 8vh;
+    max-width: 100%;
+}
+
+/**************************************************************************** TITLE ****************************************************************************/
+
+header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    flex-flow: column wrap;
+}
+
+h1 {
+    font-size: 2vh;
+    margin: 1vh 0;
+}
+
+header h1 {                    
+    font-family: "EB Garamond";
+    font-size: 2.3vh;
+}
+
+/**************************************************************************** INPUT ****************************************************************************/
+
+section {
+    width: 100%;
+    text-align: center;
+}
+
+#registro-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    flex-flow: column wrap;
+    font-size: 16px;
+}
+
+.text_box {
+    margin: 1vh 0;
+}
+
+.input_box {
+    height: 40px;
+    width: 30vw;
+    margin: 0 0 3vh;
+    border-color: black;
+    border-radius: 0px;
+    border-style: none none solid;
+    border-width: 1px;
+}
+
+#registro-form div {
+    display: flex;
+    border: none;
+}
+
+#cedula {
+    width: calc(30vw - 25px);
+    margin: 0;
+    border-color: black;
+    border-radius: 0px;
+    border-style: none none solid;
+    border-width: 1px;
+}
+
+#buscar {
+    margin: 0;
+    height: 40px;
+    width: 30px;
+    background: rgb(63, 142, 216) url("SRCH.png") center/15px no-repeat;
+    border: none;
+    border-radius: 15px;
+}
+
+#submit {
+    margin: 0;
+    padding: 10px 20px;
+    background-color: rgb(63, 142, 216);
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+input{
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+
+#nombre, #apellido, #fecha_nacimiento {
+    background-color: #e4e4e4;
+}
+
+
+.input_box:focus, #cedula:focus {
+    outline: none;
+    background: linear-gradient(to bottom, white 40%, rgb(160, 209, 255));
+}
+
+#nombre:focus, #apellido:focus, #fecha_nacimiento:focus {
+    outline: none;
+    background: #e4e4e4;
+}
+
+#nombre:hover, #apellido:hover, #fecha_nacimiento:hover {
+    cursor: default;
+}
+
+/************************************************************************ SACAR SCROLL ************************************************************************/
+
+*::-webkit-scrollbar {
+    display: none;
+}

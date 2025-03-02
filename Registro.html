@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="REG.css">
+    <script>
+        // Actualizar hora en Asunción, Paraguay
+        function actualizarHora() {
+            const ahora = new Date().toLocaleTimeString("es-PY", { timeZone: "America/Asuncion" });
+            document.getElementById("hora-actual").innerText = ahora;
+        }
+        setInterval(actualizarHora, 1000);
+
+        // Buscar datos por cédula con AJAX
+        function buscarCedula() {
+            let cedula = document.getElementById("cedula").value;
+            if (cedula === "") {
+                alert("Ingrese un número de cédula");
+                return;
+            }
+
+            fetch("buscar.php?cedula=" + cedula)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert("Cédula no encontrada");
+                    } else {
+                        document.getElementById("nombre").value = data.nombre;
+                        document.getElementById("apellido").value = data.apellido;
+                        document.getElementById("fecha_nacimiento").value = data.fecha_nacimiento;
+                    }
+                })
+                .catch(error => console.error("Error en la búsqueda:", error));
+        }
+
+        // Enviar datos a la base de datos
+        function registrarDatos(event) {
+            event.preventDefault();
+
+            let formData = new FormData(document.getElementById("registro-form"));
+
+            fetch("registrar.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                document.getElementById("registro-form").reset(); // Limpiar el formulario
+            })
+            .catch(error => console.error("Error en el registro:", error));
+        }
+
+        document.getElementById("telefono").addEventListener("input", function() {
+            this.value = this.value.replace(/[^0-9+]/g, "");
+        });
+
+    </script>
+</head>
+<body onload="actualizarHora()">
+    <div id="form">
+        <Header>
+            <img src="IMG/LOGO/MSPBS.png" id="LogoMSPBS">
+            <h1>PROGRAMA NACIONAL DE CONTROL DEL CANCER</h1>
+            <h1>PROGRAMA NACIONAL DE PREVENCION DETECCION PRECOZ Y TRATAMIENTO DEL CANCER DE CUELLO UTERINO Y MAMA</h1>
+        </Header>
+        <section>
+            <br>
+            <h1>BIENVENIDO</h1>
+            <br>
+            <br>
+            <p>Registro de Participación</p>
+            <br>
+            <p>Hora actual: <span id="hora-actual"></span></p>
+            <br>
+    
+            <form id="registro-form">
+                <label for="cedula"  class="text_box">Cédula:</label>
+                <div class="input_box">
+                    <input type="text" id="cedula" name="cedula" required>
+                    <button type="button" id="buscar" onclick="buscarCedula()"></button>
+                </div>
+    
+                <label for="nombre" class="text_box">Nombre:</label>
+                <input type="text" class="input_box" id="nombre" name="nombre" readonly>
+    
+                <label for="apellido" class="text_box">Apellido:</label>
+                <input type="text" class="input_box" id="apellido" name="apellido" readonly>
+    
+                <label for="fecha_nacimiento" class="text_box">Fecha de Nacimiento:</label>
+                <input type="text" class="input_box" id="fecha_nacimiento" name="fecha_nacimiento" readonly>
+    
+                <label for="correo" class="text_box">Correo Electrónico:</label>
+                <input type="email" class="input_box" id="correo" name="correo" required>
+    
+                <label for="telefono" class="text_box">Teléfono:</label>
+                <input type="text" class="input_box" id="telefono" name="telefono" required pattern="[\d+ ]+" title="Solo números y el símbolo +">
+    
+                <label for="establecimiento" class="text_box">Establecimiento:</label>
+                <input type="text" class="input_box" id="establecimiento" name="establecimiento" required>
+    
+                <label for="cargo" class="text_box">Cargo:</label>
+                <input type="text" class="input_box" id="cargo" name="cargo" required>
+    
+                <button type="submit" class="text_box" id="submit" onclick="registrarDatos(event)">Registrar</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
